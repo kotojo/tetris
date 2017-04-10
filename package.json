@@ -1,0 +1,32 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "tetris built with html5 canvas",
+  "main": "index.js",
+  "repository": "github.com/kotojo/tetris",
+  "author": "Bruce Kellerman",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --open --env development",
+    "build": "webpack --env production",
+    "lint:js": "eslint app/ webpack.*.js --cache"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^0.28.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "html-webpack-plugin": "^2.28.0",
+    "node-sass": "^4.5.2",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.1",
+    "webpack": "^2.3.3",
+    "webpack-dev-server": "^2.4.2",
+    "webpack-merge": "^4.1.0"
+  }
+}
