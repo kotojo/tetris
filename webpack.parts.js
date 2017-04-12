@@ -1,4 +1,5 @@
 /* eslint import/no-extraneous-dependencies:0 */
+/* eslint global-require: 0 */
 
 exports.devServer = ({ host, port } = {}) => ({
   devServer: {
@@ -78,3 +79,12 @@ exports.extractSCSS = ({ include, exclude, use }) => {
     plugins: [extractSass],
   };
 };
+
+exports.autoprefix = () => ({
+  loader: 'postcss-loader',
+  options: {
+    plugins: () => ([
+      require('autoprefixer'),
+    ]),
+  },
+});

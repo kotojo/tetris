@@ -36,9 +36,10 @@ const productionConfig = merge([
         options: {
           modules: true,
         }
-      }, {
-        loader: 'sass-loader'
-      }],
+      },
+        parts.autoprefix(),
+        'sass-loader'
+      ],
     }
   ),
 ]);
