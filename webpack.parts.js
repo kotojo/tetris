@@ -1,6 +1,8 @@
 /* eslint import/no-extraneous-dependencies:0 */
 /* eslint global-require: 0 */
 
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
 exports.devServer = ({ host, port } = {}) => ({
   devServer: {
     historyApiFallback: true,
@@ -14,6 +16,15 @@ exports.devServer = ({ host, port } = {}) => ({
   },
 });
 
+exports.generateSourceMaps = ({ type }) => ({
+  devtool: type,
+});
+exports.clean = path => ({
+  plugins: [
+    new CleanWebpackPlugin([path]),
+  ],
+});
+
 exports.lintJavaScript = ({ include, exclude, options }) => ({
   module: {
     rules: [
@@ -25,6 +36,22 @@ exports.lintJavaScript = ({ include, exclude, options }) => ({
 
         loader: 'eslint-loader',
         options,
+      },
+    ],
+  },
+});
+
+exports.loadJavaScript = ({ include, exclude }) => ({
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include,
+        exclude,
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true,
+        },
       },
     ],
   },

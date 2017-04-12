@@ -12,9 +12,10 @@ const PATHS = {
 
 const commonConfig = merge([
   {
-    entry: {
-      app: PATHS.app,
-    },
+    entry: [
+      'babel-polyfill',
+      PATHS.app,
+    ],
     output: {
       path: PATHS.build,
       filename: '[name].js',
@@ -26,9 +27,12 @@ const commonConfig = merge([
     ],
   },
   parts.lintJavaScript({ include: PATHS.app }),
+  parts.loadJavaScript({ include: PATHS.app }),
 ]);
 
 const productionConfig = merge([
+  parts.clean(PATHS.build),
+  parts.generateSourceMaps({ type: 'source-map' }),
   parts.extractSCSS(
     {
       use: [{
@@ -45,6 +49,12 @@ const productionConfig = merge([
 ]);
 
 const developmentConfig = merge([
+  {
+    output: {
+      devtoolModuleFilenameTemplate: 'webpack:///[absolute-resource-path]',
+    },
+  },
+  parts.generateSourceMaps({ type: 'cheap-source-map' }),
   parts.devServer({
     host: process.env.HOST,
     port: process.env.PORT,
