@@ -2,6 +2,7 @@
 /* eslint global-require: 0 */
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const path = require('path');
 
 exports.devServer = ({ host, port } = {}) => ({
   devServer: {
@@ -57,13 +58,15 @@ exports.loadJavaScript = ({ include, exclude }) => ({
   },
 });
 
-exports.loadCSS = ({ include, exclude } = {}) => ({
+const globalCSS = path.join(__dirname, 'app/main.scss');
+
+exports.loadCSS = ({ include } = {}) => ({
   module: {
     rules: [
       {
         test: /\.scss$/,
         include,
-        exclude,
+        exclude: globalCSS,
         use: [
           'style-loader',
           {
@@ -75,13 +78,22 @@ exports.loadCSS = ({ include, exclude } = {}) => ({
           'sass-loader',
         ],
       },
+      {
+        test: /\.scss$/,
+        include: globalCSS,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
+      },
     ],
   },
 });
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-exports.extractSCSS = ({ include, exclude, use }) => {
+exports.extractSCSS = ({ include, use }) => {
   // Output extracted CSS to a file
   const extractSass = new ExtractTextPlugin({
     filename: '[name].[contenthash].css',
@@ -94,10 +106,21 @@ exports.extractSCSS = ({ include, exclude, use }) => {
         {
           test: /\.scss$/,
           include,
-          exclude,
-
+          exclude: globalCSS,
           use: extractSass.extract({
             use,
+            fallback: 'style-loader',
+          }),
+        },
+        {
+          test: /\.scss$/,
+          include: globalCSS,
+          use: extractSass.extract({
+            use: [
+              'css-loader',
+              exports.autoprefix(),
+              'sass-loader',
+            ],
             fallback: 'style-loader',
           }),
         },

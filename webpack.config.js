@@ -22,7 +22,8 @@ const commonConfig = merge([
     },
     plugins: [
       new HtmlWebpackPlugin({
-        title: 'Webpack demo',
+        append: true,
+        template: `${PATHS.app}/index.html`,
       }),
     ],
   },

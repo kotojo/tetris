@@ -1,0 +1,29 @@
+@mixin third() {
+    flex: 0 0 33%;
+    justify-content: space-between;
+}
+
+@mixin half() {
+  flex: 0 0 50%;
+  justify-content: space-between;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .flex > .col.md-third { @include third(); }
+  .flex > .col.md-half { @include half(); }
+}
+
+@media only screen and (min-width: 1200px) {  
+  .flex > .col.lg-third { @include third(); }
+  .flex > .col.lg-half { @include half(); }
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+
+  .col {
+    flex: 1;
+  }
+}

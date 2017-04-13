@@ -1,12 +1,11 @@
+@import 'grid';
+
 $font-list: Helvetica, sans-serif;
 
 body {
-  background: cornsilk;
   font: 100% $font-list;
-
-  display: flex;
 }
 
-.redButton {
-  background: red;
+#canvas {
+  border: 1px solid black;  
 }
