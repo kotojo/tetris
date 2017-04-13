@@ -1,3 +1,6 @@
+$desktop: 1200px;
+$tablet: 768px;
+
 @mixin third() {
     flex: 0 0 33%;
     justify-content: space-between;
@@ -9,12 +12,12 @@
 }
 
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: $tablet) {
   .flex > .col.md-third { @include third(); }
   .flex > .col.md-half { @include half(); }
 }
 
-@media only screen and (min-width: 1200px) {  
+@media only screen and (min-width: $desktop) {  
   .flex > .col.lg-third { @include third(); }
   .flex > .col.lg-half { @include half(); }
 }
