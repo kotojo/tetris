@@ -1,24 +1,18 @@
-/* global document,window */
-
 import './main.scss';
+import Game from './game/game';
+
+let tetris;
+
+// window.addEventListener('resize', () => resizeThrottler('canvas'), false);
+// document.addEventListener('DOMContentLoaded', () => {
+//   actualResizeHandler('canvas');
+//   actualResizeHandler('canvas');
+// why the heck does width not finish setting till after the first resize?
+// });
 
 const canvas = document.getElementById('canvas');
-
-function actualResizeHandler() {
-  let { width } = document.defaultView.getComputedStyle(canvas);
-  width = Number(width.slice(0, width.length - 2));
-  canvas.style.height = `${width * 2}px`;
-}
-
-let resizeTimeout;
-function resizeThrottler() {
-  if (!resizeTimeout) {
-    resizeTimeout = setTimeout(() => {
-      resizeTimeout = null;
-      actualResizeHandler();
-    }, 66); // 15 fps
-  }
-}
-
-window.addEventListener('resize', resizeThrottler, false);
-actualResizeHandler(); // fire on init
+const gameBtn = document.getElementById('gameButton');
+gameBtn.addEventListener('click', () => {
+  tetris = Game({ canvas });
+  tetris.play();
+});
