@@ -1,4 +1,4 @@
-import './main.scss';
+import './styles/main.scss';
 import Game from './game/game';
 
 let tetris;
